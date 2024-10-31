@@ -1,0 +1,17 @@
+name: Deploy to Server
+on:
+  push:
+    branches:
+      - main # Укажите ветку для развертывания
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Deploy to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          ssh root@root@194.87.232.2 "cd && cd /testwebdeploy && git pull && npm install && npm run build"
