@@ -27,4 +27,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no root@194.87.232.2 "cd && cd /testwebdeploy && git pull && npm install && npm run build"
+          ssh -o StrictHostKeyChecking=no root@194.87.232.2 "cd && cd testwebdeploy && git pull && npm install && npm run build"
