@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main  # Укажите ветку для развертывания
+      - main # Укажите ветку для развертывания
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Укажите нужную версию Node.js
+          node-version: "16" # Укажите нужную версию Node.js
 
       - name: Install dependencies
         run: npm install
@@ -29,4 +29,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-          ssh user@your_server_ip "cd /path/to/your/app && git pull && npm install && npm run build"
+          ssh root@root@194.87.232.2 "cd && cd /testwebdeploy && git pull && npm install && npm run build"
