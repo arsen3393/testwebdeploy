@@ -3,15 +3,21 @@ on:
   push:
     branches:
       - main # Укажите ветку для развертывания
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Deploy to server
+
+      - name: Set up SSH agent
+        run: |
+          eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to server
         run: |
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           ssh root@194.87.232.2 "cd /testwebdeploy && git pull && npm install && npm run build"
